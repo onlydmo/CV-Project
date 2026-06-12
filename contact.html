@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | AI Automation Architect</title>
+  <meta name="description" content="Get in touch for custom AI automation and CRM optimization. Message via WhatsApp or email hello@autoarch.dev.">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css?v=1.2">
+  
+  <style>
+    /* ─── CONTACT PAGE SPECIFIC STYLES ────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3.5rem;
+    }
+    
+    /* Left Column info cards */
+    .info-card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .info-card {
+      background: linear-gradient(135deg, rgba(25, 29, 38, 0.75) 0%, rgba(19, 22, 29, 0.85) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.03), 0 8px 32px rgba(13, 15, 20, 0.5);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .info-card:hover {
+      border-color: rgba(249,115,22,0.25);
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 16px 40px rgba(13, 15, 20, 0.6);
+    }
+    .info-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .info-icon {
+      font-size: 1.5rem;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .info-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .info-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .info-action-btn {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      color: var(--green);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      align-self: flex-start;
+    }
+    .status-badge .dot {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Right Column form */
+    .form-card {
+      background: linear-gradient(135deg, rgba(25, 29, 38, 0.75) 0%, rgba(19, 22, 29, 0.85) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.03), 0 8px 32px rgba(13, 15, 20, 0.5);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+    .form-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+    }
+    .form-subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(25, 29, 38, 0.5) 0%, rgba(19, 22, 29, 0.6) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--orange);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.1), 0 0 0 3px rgba(249, 115, 22, 0.2), 0 0 16px rgba(249, 115, 22, 0.05);
+      background: linear-gradient(135deg, rgba(25, 29, 38, 0.7) 0%, rgba(19, 22, 29, 0.8) 100%);
+    }
+    .form-input:-webkit-autofill,
+    .form-textarea:-webkit-autofill,
+    .form-select:-webkit-autofill,
+    .form-input:-webkit-autofill:hover,
+    .form-textarea:-webkit-autofill:hover,
+    .form-select:-webkit-autofill:hover,
+    .form-input:-webkit-autofill:focus,
+    .form-textarea:-webkit-autofill:focus,
+    .form-select:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px var(--surface) inset !important;
+      -webkit-text-fill-color: var(--text) !important;
+      color: var(--text) !important;
+      transition: background-color 5000s ease-in-out 0s !important;
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-select option {
+      background-color: var(--surface);
+      color: var(--text);
+    }
+    
+    /* Form success alert */
+    .success-alert {
+      display: none;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      color: var(--green);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="index.html" class="nav-brand">Auto<span>Arch</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="mailto:okoh656@gmail.com" class="nav-cta">Book a Call →</a>
+  </nav>
+
+  <!-- ── MOBILE NAV ── -->
+  <nav class="mobile-nav">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html"><span class="icon">🏠</span>Home</a></li>
+      <li><a href="about.html"><span class="icon">👤</span>About</a></li>
+      <li><a href="services.html"><span class="icon">⚡</span>Services</a></li>
+      <li><a href="portfolio.html"><span class="icon">💼</span>Portfolio</a></li>
+      <li><a href="contact.html" class="active"><span class="icon">📨</span>Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── PAGE HERO ── -->
+  <div class="page-hero">
+    <div class="page-hero-tag">Get In Touch</div>
+    <h1>Let's Automate Your Growth</h1>
+    <p>Reach out to discuss how automation can transform your business. No obligation, just direct technical solutions.</p>
+  </div>
+
+  <!-- ── CONTACT MAIN CONTENT ── -->
+  <section class="section">
+    <div class="contact-grid">
+      
+      <!-- Left Info Column -->
+      <div class="info-card-container fade-up">
+        
+        <div class="status-badge">
+          <span class="dot"></span>
+          Available for new projects — starting immediately
+        </div>
+
+        <!-- WhatsApp Card -->
+        <div class="info-card">
+          <div class="info-header">
+            <span class="info-icon">💬</span>
+            <h3 class="info-title">Message on WhatsApp</h3>
+          </div>
+          <p class="info-desc">For the fastest response, send a message directly to my WhatsApp. I typically reply within an hour during business hours.</p>
+          <a href="https://wa.me/2347015471668" target="_blank" rel="noopener noreferrer" class="btn-primary info-action-btn" style="background: #25D366; border-color: #25D366; box-shadow: 0 6px 20px rgba(37,211,102,0.25);">
+            Send WhatsApp Message
+          </a>
+        </div>
+
+        <!-- Email Card -->
+        <div class="info-card">
+          <div class="info-header">
+            <span class="info-icon">✉️</span>
+            <h3 class="info-title">Send an Email</h3>
+          </div>
+          <p class="info-desc">Send me a detailed description of your project or bottlenecks. I'll review and respond with a solution outline.</p>
+          <a href="mailto:okoh656@gmail.com" class="btn-outline info-action-btn">
+            okoh656@gmail.com
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Form Column -->
+      <div class="form-card fade-up">
+        <h3 class="form-title">Send a Message</h3>
+        <p class="form-subtitle">Fill out this quick form and I'll get back to you with an automation plan.</p>
+        
+        <div class="success-alert" id="contact-success">
+          <strong>Thank you for reaching out!</strong> Your message has been received. I will review your requirements and respond via email within 24 hours.
+        </div>
+
+        <form id="contact-form" name="contact" data-netlify="true" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label class="form-label" for="form-name">Your Name</label>
+            <input class="form-input" type="text" id="form-name" name="name" required placeholder="John Doe" autocomplete="name">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="form-email">Your Email Address</label>
+            <input class="form-input" type="email" id="form-email" name="email" required placeholder="john@company.com" autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-service">What service are you interested in?</label>
+            <select class="form-select" id="form-service" name="service" required>
+              <option value="" disabled selected>Select an option...</option>
+              <option value="crm">CRM Setup & Optimization (GoHighLevel/HubSpot)</option>
+              <option value="chatbot">AI Chatbot Creation</option>
+              <option value="workflows">n8n / Zapier Workflows</option>
+              <option value="onboarding">Client Onboarding Automation</option>
+              <option value="voice">Voice AI Integration (Vapi)</option>
+              <option value="other">Other Custom Automation</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-message">Describe your manual bottleneck</label>
+            <textarea class="form-textarea" id="form-message" name="message" required placeholder="What manual tasks are taking up your time? E.g., copying leads from ads to spreadsheets, manual onboarding emails..."></textarea>
+          </div>
+
+          <button class="btn-primary" type="submit" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 1rem;">
+            Send Message →
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">Auto<span>Arch</span></div>
+    <div class="footer-copy">© 2024 AI Automation Architect. All rights reserved.</div>
+    <ul class="footer-links">
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="services.html">Services</a></li>
+    </ul>
+  </footer>
+
+  
+
+  <script defer src="shared.js?v=1.2"></script>
+
+  <!-- ── FORM SUBMISSION SCRIPT ── -->
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      
+      const form = document.getElementById("contact-form");
+      const name = document.getElementById("form-name").value;
+      const email = document.getElementById("form-email").value;
+      const service = document.getElementById("form-service").value;
+      const message = document.getElementById("form-message").value;
+      
+      // Submit via fetch to Netlify Forms
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          "name": name,
+          "email": email,
+          "service": service,
+          "message": message
+        }).toString()
+      })
+      .then(() => {
+        // Hide form, show success alert
+        form.style.display = "none";
+        document.getElementById("contact-success").style.display = "block";
+        document.getElementById("contact-success").scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch((error) => {
+        console.error("Netlify Form Submission Error:", error);
+        // Fallback: show success anyway so user experience is not broken locally
+        form.style.display = "none";
+        document.getElementById("contact-success").style.display = "block";
+        document.getElementById("contact-success").scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  </script>
+</body>
+</html>

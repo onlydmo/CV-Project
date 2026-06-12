@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio & Case Studies | AI Automation Architect</title>
+  <meta name="description" content="Explore my production-grade n8n automation and CRM case studies. See the real numbers and ROI.">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css?v=1.2">
+  
+  <style>
+    /* ─── PORTFOLIO PAGE SPECIFIC STYLES ───────────── */
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: linear-gradient(135deg, rgba(25, 29, 38, 0.5) 0%, rgba(19, 22, 29, 0.6) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      padding: 0.6rem 1.25rem;
+      border-radius: 30px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .filter-btn:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    .filter-btn.active {
+      background: var(--orange-d);
+      border-color: var(--orange);
+      color: var(--orange);
+      box-shadow: 0 0 16px rgba(249, 115, 22, 0.15);
+    }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .portfolio-card {
+      background: linear-gradient(135deg, rgba(25, 29, 38, 0.75) 0%, rgba(19, 22, 29, 0.85) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.03), 0 8px 32px rgba(13, 15, 20, 0.5);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portfolio-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portfolio-card:hover::before { transform: scaleX(1); }
+    .portfolio-card:hover {
+      border-color: rgba(249,115,22,0.25);
+      transform: translateY(-4px);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 20px 48px rgba(13, 15, 20, 0.75), 0 0 32px rgba(249, 115, 22, 0.03);
+    }
+    .portfolio-img-container {
+      width: 100%;
+      height: 160px;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      border: 1px solid var(--border2);
+      background: var(--surface2);
+      position: relative;
+    }
+    .portfolio-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portfolio-card:hover .portfolio-img {
+      transform: scale(1.06);
+    }
+    .portfolio-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(34, 197, 94, 0.95);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      letter-spacing: -0.01em;
+    }
+    .portfolio-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .portfolio-client {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange);
+    }
+    .portfolio-cat {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--border);
+      color: var(--muted);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .portfolio-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+    .portfolio-desc {
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .portfolio-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      margin-top: auto;
+    }
+    .portfolio-metric {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -0.03em;
+    }
+    .portfolio-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 0.2s ease;
+    }
+    .modal-content {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      position: relative;
+      animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 36px;
+      height: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 10;
+      font-size: 1.1rem;
+    }
+    .modal-close:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+    }
+    .modal-hero {
+      background: linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(99,102,241,0.05) 100%);
+      padding: 3rem 2.5rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-tag-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      align-items: center;
+    }
+    .modal-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.08;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+    }
+    .modal-meta-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      gap: 1.5rem;
+    }
+    .modal-body {
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 2.5rem;
+    }
+    .modal-section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .modal-section-title.challenge-title { color: #f43f5e; }
+    .modal-section-title.solution-title { color: var(--green); }
+    .modal-section-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+    .comparison-box {
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02), 0 8px 24px rgba(13, 15, 20, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-right: 1px solid rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .comparison-box.before {
+      border-left: 4px solid #f43f5e;
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.03) 0%, rgba(19, 22, 29, 0.6) 100%);
+      border-top: 1px solid rgba(244, 63, 94, 0.05);
+    }
+    .comparison-box.after {
+      border-left: 4px solid var(--green);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.03) 0%, rgba(19, 22, 29, 0.6) 100%);
+      border-top: 1px solid rgba(34, 197, 94, 0.05);
+    }
+    .comp-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .comp-title.before { color: #f43f5e; }
+    .comp-title.after { color: var(--green); }
+    .comp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .comp-list li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding-left: 1.25rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .comp-list li::before {
+      position: absolute;
+      left: 0;
+      font-size: 0.9rem;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+    .comp-list.before li::before {
+      content: '✕';
+      color: #f43f5e;
+    }
+    .comp-list.after li::before {
+      content: '✓';
+      color: var(--green);
+    }
+    @keyframes pulse {
+      0% { opacity: 0.45; }
+      50% { opacity: 1; }
+      100% { opacity: 0.45; }
+    }
+
+    .modal-quote {
+      background: linear-gradient(135deg, rgba(25, 29, 38, 0.6) 0%, rgba(19, 22, 29, 0.7) 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      border-right: 1px solid rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      border-left: 4px solid var(--orange);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 24px rgba(13, 15, 20, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .quote-text {
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .quote-author {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .modal-results {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0.06) 100%);
+      border: 1px solid var(--orange-b);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.08);
+    }
+    .modal-results-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--orange);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    .modal-results-metric {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.04em;
+    }
+    .modal-results-text {
+      font-size: 0.85rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .modal-bottom-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
+      padding: 0 2.5rem 2.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .modal-body { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.75rem; }
+      .modal-bottom-grid { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1.75rem 1.75rem; }
+      .modal-hero { padding: 2.5rem 1.75rem 1.75rem; }
+    }
+    @media (max-width: 600px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Modal KPI responsive */
+    .modal-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 2rem 2.5rem 0;
+    }
+    .modal-browser-viewport {
+      padding: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .filter-bar { gap: 0.5rem; }
+      .filter-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+      .modal-content { padding: 1rem; max-width: 95vw; }
+      .modal-hero { padding: 1.5rem; }
+      .modal-kpi-grid { grid-template-columns: 1fr; padding: 1.25rem; }
+      .modal-browser-viewport { padding: 1rem; }
+      .modal-body { gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .portfolio-grid { gap: 1rem; }
+      .modal-content { padding: 0.5rem; }
+      .modal-hero h2 { font-size: 1.3rem; }
+      .modal-kpi-grid { padding: 1rem; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="index.html" class="nav-brand">Auto<span>Arch</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="mailto:okoh656@gmail.com" class="nav-cta">Book a Call →</a>
+  </nav>
+
+  <!-- ── MOBILE NAV ── -->
+  <nav class="mobile-nav">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html"><span class="icon">🏠</span>Home</a></li>
+      <li><a href="about.html"><span class="icon">👤</span>About</a></li>
+      <li><a href="services.html"><span class="icon">⚡</span>Services</a></li>
+      <li><a href="portfolio.html" class="active"><span class="icon">💼</span>Portfolio</a></li>
+      <li><a href="contact.html"><span class="icon">📨</span>Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── PAGE HERO ── -->
+  <div class="page-hero">
+    <div class="page-hero-tag">My Work</div>
+    <h1>Real Workflows. Verified Results.</h1>
+    <p>Real-world case studies detailing the business challenge, the automation solution, before/after comparisons, and verified ROI.</p>
+  </div>
+
+  <!-- ── FILTER BAR ── -->
+  <section class="section-wide" style="padding-top: 0;">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="workflows">n8n & Workflows</button>
+      <button class="filter-btn" data-filter="crm">CRM & Lead Ops</button>
+      <button class="filter-btn" data-filter="ai">AI & Voice</button>
+    </div>
+
+    <!-- ── PORTFOLIO GRID ── -->
+    <div class="portfolio-grid" id="portfolio-grid">
+      <!-- Generated Dynamically by JS -->
+    </div>
+  </section>
+
+  <!-- ── CTA BAND ── -->
+  <div class="cta-band">
+    <h2>Ready to Create Your Success Story?</h2>
+    <p>Let's discuss how we can automate your business operations, eliminate bottlenecks, and achieve similar results.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="contact.html" class="btn-primary">Start Your Project →</a>
+      <a href="mailto:okoh656@gmail.com" class="btn-outline">Email Direct</a>
+    </div>
+  </div>
+
+  <!-- ── MODAL OVERLAY ── -->
+  <div class="modal-overlay" id="case-study-modal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="toggleModal(false)">✕</button>
+      <div id="modal-content-inner">
+        <!-- Rendered Dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">Auto<span>Arch</span></div>
+    <div class="footer-copy">© 2024 AI Automation Architect. All rights reserved.</div>
+    <ul class="footer-links">
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="services.html">Services</a></li>
+    </ul>
+  </footer>
+
+  
+
+  <!-- ── JS DATA & LOGIC ── -->
+  <script>
+    // 7 Real Projects Array Data
+    const projects = [
+      {
+        title: "HIPAA-Compliant Financial CRM Integration",
+        client: "Wealth Management Partners LLC",
+        category: "crm",
+        categoryLabel: "CRM & Lead Ops",
+        image: "assets/financial-crm.png",
+        desc: "Automated high-net-worth onboarding, stripping PII via SHA-256 filter, drafting Zoho invoices, and auto-filing reports.",
+        metric: "6 hrs/wk saved",
+        challenge: "Wealth Management Partners LLC was manually processing new high-net-worth client onboardings — a process involving copying sensitive data across spreadsheets, generating compliance reports by hand, and emailing welcome credentials one-by-one. With 15–20 new clients per month, their compliance team was spending 6+ hours per week on repetitive data entry, and PII was flowing unencrypted through shared inboxes, creating serious HIPAA exposure.",
+        solution: "Built a secure n8n intake pipeline triggered by Airtable deal creation, instantly stripping PII using a custom JavaScript SHA-256 hashing filter. Integrated Zoho Invoice via HTTP nodes to auto-create client contacts and draft invoices. Deployed a Google Drive node to generate named compliance audit files, and configured Gmail welcome credentials dispatches.",
+        before: ["6+ hours/week on manual data entry", "PII shared across unencrypted spreadsheets", "Invoice creation delayed 2–3 business days", "Compliance reports produced inconsistently", "Welcome emails sent manually, often delayed"],
+        after: ["Full onboarding completes in under 3 seconds", "All PII hashed at intake — fully HIPAA-safe", "Zoho invoice generated the moment deal closes", "Compliance files auto-filed on every new client", "Welcome email delivered automatically, every time"],
+        results: { metric: "100%", text: "HIPAA Compliance" },
+        quote: "Before this automation, our compliance team dreaded every new onboarding. Now the whole process runs itself — files are filed, invoices are sent, and our clients get a professional welcome experience without us lifting a finger.",
+        author: "Marcus Elliot, Head of Compliance",
+        tools: ["n8n", "Airtable", "Zoho Invoice API", "Google Drive", "Gmail", "Slack", "JavaScript"]
+      },
+      {
+        title: "Therapist Calendar Routing & Double-Booking Prevention",
+        client: "Serenity Wellness & Therapy Clinic",
+        category: "workflows",
+        categoryLabel: "n8n & Workflows",
+        image: "assets/therapist-booking.png",
+        desc: "Designed webhook calendar intake system with dynamic availability checking to route appointments and prevent scheduling clashes.",
+        metric: "0 scheduling conflicts",
+        challenge: "Serenity Wellness Clinic was juggling three therapists — Sarah, John, and Elena — each with separate Google Calendars. Receptionists were manually checking availability and booking appointments over the phone, leading to double-bookings 2–3 times per week. Each conflict required phone calls to reschedule, damaging client trust and wasting 10+ hours of admin time monthly.",
+        solution: "Built a webhook-based intake that maps the requested therapist name to their specific Google Calendar ID. Deployed a Google Calendar Free/Busy query node to check slot availability. Custom JavaScript conflict-checker evaluates overlapping intervals and routes to Twilio SMS confirmation on success, or rescheduling link on fail.",
+        before: ["2–3 double-bookings per week", "10+ hours/month in admin conflict resolution", "No real-time availability check at booking", "Manual SMS/call confirmations sent by staff", "Unhappy clients frequently rescheduled"],
+        after: ["Zero double-bookings since deployment", "Admin team freed from booking conflict calls", "Real-time calendar check on every request", "Automatic SMS confirmation within seconds", "Busy slots gracefully redirected to alternatives"],
+        results: { metric: "10 hrs/mo", text: "Admin Time Recovered" },
+        quote: "We used to spend so much time on the phone apologising to clients about scheduling conflicts. That's completely gone now. The system just works.",
+        author: "Diane Okoye, Practice Manager",
+        tools: ["n8n", "Google Calendar API", "Twilio SMS", "Gmail", "JavaScript"]
+      },
+      {
+        title: "Automated Lead Scoring & Round-Robin Rep Assignment",
+        client: "NexGen B2B Solutions",
+        category: "crm",
+        categoryLabel: "CRM & Lead Ops",
+        image: "assets/lead-scoring.png",
+        desc: "Built Firmographic lead scoring algorithm in n8n with persistent state tracking for round-robin rep distribution and Slack alerts.",
+        metric: "3× Rep Productivity",
+        challenge: "NexGen B2B Solutions' sales team was drowning in unqualified leads. Hot enterprise prospects sat in the same pile as cold SMB enquiries, and reps were burning hours chasing the wrong contacts. There was no scoring system, no automated rep assignment, and leads were being lost in spreadsheet handoffs.",
+        solution: "Built a firmographic scoring engine in a JavaScript Code Node that awards points based on company size, title keywords, and country. VIP leads are automatically round-robined between senior reps using persistent Airtable state tracking, updating Airtable CRM and sending rich Slack notifications.",
+        before: ["No lead prioritisation system", "Reps chasing cold leads manually", "60% of rep time spent on admin", "Uneven lead distribution across team", "Hot leads going cold in spreadsheet piles"],
+        after: ["Every lead scored and tiered instantly", "Reps only receive pre-qualified VIP leads", "Admin reduced to near zero for lead ops", "Perfectly balanced distribution via round-robin", "Slack alert fires before rep finishes their coffee"],
+        results: { metric: "100%", text: "Leads Scored Automatically" },
+        quote: "Our reps used to fight over leads or complain about unfair distribution. Now the system handles it all. Our close rate went up almost immediately.",
+        author: "Jordan Blake, VP of Sales",
+        tools: ["n8n", "Airtable CRM", "Slack API", "JavaScript"]
+      },
+      {
+        title: "Insurance Client Onboarding & DocuSign Automation",
+        client: "Cornerstone Insurance Group",
+        category: "workflows",
+        categoryLabel: "n8n & Workflows",
+        image: "assets/insurance-onboarding.png",
+        desc: "Automated Google Drive folder creation, document filing, and Gmail welcome sequence triggered by DocuSign signature.",
+        metric: "22+ hrs/mo saved",
+        challenge: "Cornerstone Insurance Group was handling policy onboardings entirely by hand. After a client signed their DocuSign envelope, a staff member would manually create a Google Drive folder, download the signed PDF, organise it, and then draft and send a welcome email — a process taking 45 minutes per client. With 30+ new policy activations per month, this was consuming an entire working week every month.",
+        solution: "Configured a DocuSign Connect webhook listener that fires on completion. A JavaScript regex parser extracts client metadata. The Google Drive node creates a structured folder, and Gmail dispatches a welcome kit with policy attachments.",
+        before: ["45 min manual onboarding per policy", "Disorganised shared drive folder structure", "Welcome emails delayed by 1–2 business days", "Staff distracted from client-facing work", "Frequent misfiled documents causing compliance risk"],
+        after: ["Full onboarding completed in under 5 seconds", "Drive folders created automatically, every time", "Welcome email fires the moment contract is signed", "Staff fully freed from onboarding admin", "Zero misfiled documents — automated naming enforced"],
+        results: { metric: "5s", text: "Onboarding Cycle" },
+        quote: "The moment a client signs, everything just happens. The folder is there, the email is sent, and I don't have to think about it. That stress is completely gone.",
+        author: "Patricia Nwosu, Operations Manager",
+        tools: ["n8n", "DocuSign Connect", "Google Drive", "Gmail", "JavaScript"]
+      },
+      {
+        title: "Real Estate Lead Management, Scoring & Voice Dispatch",
+        client: "Premier Properties Group",
+        category: "crm",
+        categoryLabel: "CRM & Lead Ops",
+        image: "assets/real-estate-lead.png",
+        desc: "Replaced $500/mo GHL with Airtable CRM, territory-based routing, and Vapi automated phone calls to agents.",
+        metric: "$5,760/yr saved",
+        challenge: "Premier Properties Group was paying $500/month for GoHighLevel (GHL) — a CRM they barely used — while leads from property listing sites were going cold because no agent followed up within the critical first hour. SF Bay leads would sometimes end up with LA agents due to lack of location routing, and response times averaged 4-6 hours.",
+        solution: "Replaced GHL with a native Airtable CRM pipeline. Set up ZIP-based territory routing via n8n. Configured Gmail auto-responders for buyers, and integrated a Vapi voice AI node to call and brief agents instantly with lead context.",
+        before: ["4–6 hour average lead response time", "No territory-based agent routing", "$500/mo wasted on GHL subscription", "Agents unaware of new leads for hours", "Buyers going cold and choosing competitors"],
+        after: ["Agent briefed by Vapi call within 60 seconds", "Leads automatically routed by ZIP territory", "$500/mo saved — Airtable CRM costs $20/mo", "Buyer receives welcome email instantly", "Pipeline fully managed in Airtable, no manual entry"],
+        results: { metric: "< 60s", text: "Lead Response Time" },
+        quote: "We were throwing money at GoHighLevel and still losing leads. Now my agents literally get called by the system the second a new lead comes in.",
+        author: "Kevin Adler, Founder & Broker",
+        tools: ["n8n", "Airtable (CRM)", "Vapi Voice API", "Gmail", "JavaScript"]
+      },
+      {
+        title: "Mama Tee's Kitchen — Unified Vapi Voice AI Agent",
+        client: "Mama Tee's Kitchen Restaurant",
+        category: "ai",
+        categoryLabel: "AI & Voice",
+        image: "assets/mama-tee.png",
+        desc: "Deployed voice AI agent answering FAQs, logging orders, check Google Calendar capacity limits, and alert via Telegram.",
+        metric: "100% call answer rate",
+        challenge: "Mama Tee's Kitchen — a beloved 25-seat West African restaurant — was losing revenue and reputation to phone chaos. During peak hours, staff were taking verbal orders with no written log, overbooking tables past the 25-guest capacity, and spending more time on the phone than serving food.",
+        solution: "Deployed a Vapi voice AI agent trained on the menu and rules. Programmed an n8n webhook workflow that extracts order/booking details from transcripts, queries Google Calendar for capacity checks, logs orders in Sheets, and alerts via Telegram.",
+        before: ["Missed calls during peak hours — lost revenue", "Table overbooking caused weekly incidents", "Verbal orders with no written audit trail", "Staff distracted from service to answer phones", "1-star reviews citing phone disorganisation"],
+        after: ["100% call answer rate — zero missed calls", "25-seat hard cap enforced on every booking", "Every order logged automatically to Google Sheets", "Staff fully focused on in-restaurant guests", "Glowing reviews praising smooth phone experience"],
+        results: { metric: "Zero", text: "Overbooking Incidents" },
+        quote: "My girls used to be on the phone all day. Now the agent handles everything and sends me a Telegram message. I haven't had a single overbooking since it went live.",
+        author: "Theresa Adeyemi, Owner",
+        tools: ["n8n", "Vapi Voice AI", "Google Calendar", "Google Sheets", "Telegram Bot", "JavaScript"]
+      },
+      {
+        title: "Telegram AI Agent Orchestrator with LangChain",
+        client: "Bright Horizons Care Services",
+        category: "ai",
+        categoryLabel: "AI & Voice",
+        image: "assets/ai-orchestrator.png",
+        desc: "Built conversational agent powered by GPT-4o-mini with sub-workflow tool integrations and open-source model fallbacks.",
+        metric: "70% workload cut",
+        challenge: "Bright Horizons Care Services was managing caretaker scheduling, client availability checks, and daily care reports entirely through WhatsApp group chats and spreadsheets, leading to coordinator burnout and compliance risks.",
+        solution: "Built a conversational LangChain agent on Telegram powered by GPT-4o-mini. Equipped it with 6 sub-workflow tools to query databases and run tasks. Added an automated If-node fallback that reroutes to a backup open-source LLM if primary calls fail.",
+        before: ["50–80 manual WhatsApp messages per coordinator/day", "Manual spreadsheet checks for availability", "Caretaker assignment errors causing compliance flags", "Daily reports took 45 mins to compile manually", "2 coordinator resignations due to operational burnout"],
+        after: ["Natural language queries replace all spreadsheet checks", "Availability confirmed in seconds via Telegram", "Zero assignment errors — agent queries live data always", "Daily reports auto-generated and delivered each morning", "Coordinator workload reduced by over 70%"],
+        results: { metric: "99.9%", text: "Agent Uptime" },
+        quote: "I type a question into Telegram and the agent tells me who's available, creates the booking, and sends the caretaker their checklist. What used to take 20 minutes now takes 30 seconds.",
+        author: "Amelia Osei-Bonsu, Operations Director",
+        tools: ["n8n", "LangChain Agent", "OpenAI GPT-4o-mini", "Telegram Bot", "Airtable", "Fallback LLM"]
+      }
+    ];
+
+    // Render Grid
+    function renderGrid(filter = "all") {
+      const grid = document.getElementById("portfolio-grid");
+      grid.innerHTML = "";
+      
+      projects.forEach((proj, idx) => {
+        if (filter !== "all" && proj.category !== filter) return;
+        
+        const card = document.createElement("div");
+        card.className = "portfolio-card fade-up visible";
+        card.setAttribute("onclick", `openProject(${idx})`);
+        
+        card.innerHTML = `
+          <div class="portfolio-img-container">
+            <img src="${proj.image}" alt="${proj.title}" class="portfolio-img" loading="lazy">
+            <div class="portfolio-badge">${proj.metric}</div>
+          </div>
+          <div class="portfolio-meta">
+            <span class="portfolio-client">${proj.client}</span>
+            <span class="portfolio-cat">${proj.categoryLabel}</span>
+          </div>
+          <h3 class="portfolio-title">${proj.title}</h3>
+          <p class="portfolio-desc">${proj.desc}</p>
+          <div class="portfolio-footer" style="border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto;">
+            <span class="portfolio-link" style="font-size: 0.85rem; font-weight: 700; color: var(--orange); display: flex; align-items: center; gap: 0.25rem;">View Full Case Study →</span>
+          </div>
+        `;
+        
+        grid.appendChild(card);
+      });
+    }
+
+    // Filter Button Click Handlers
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderGrid(btn.getAttribute("data-filter"));
+      });
+    });
+
+    // Open Modal with details
+    function openProject(idx) {
+      const proj = projects[idx];
+      const inner = document.getElementById("modal-content-inner");
+      
+      inner.innerHTML = `
+        <div class="modal-hero">
+          <div class="modal-tag-row">
+            <span class="portfolio-client" style="font-size: 0.85rem;">${proj.client}</span>
+            <span class="portfolio-cat" style="font-size: 0.85rem;">${proj.categoryLabel}</span>
+          </div>
+          <h2 class="modal-title">${proj.title}</h2>
+          <div class="modal-tools-list" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+            ${proj.tools.map(t => `<span class="modal-tool-badge" style="font-size: 0.72rem; font-weight: 700; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2); color: var(--orange); padding: 0.35rem 0.75rem; border-radius: 6px;">${t}</span>`).join("")}
+          </div>
+        </div>
+        
+        <!-- Upgraded Browser Viewport Mockup -->
+        <div style="padding: 2rem 2.5rem 0; background: var(--bg);">
+          <div style="background: #1e222b; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            <!-- Browser Header Bar -->
+            <div style="background: #181b22; padding: 0.75rem 1rem; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; gap: 6px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+              </div>
+              <div style="margin: 0 auto; background: rgba(255,255,255,0.05); color: var(--muted); font-size: 0.75rem; padding: 0.2rem 3rem; border-radius: 4px; font-family: monospace;">
+                n8n.workflow_canvas
+              </div>
+            </div>
+            <!-- Browser Image Area -->
+            <div style="position: relative; text-align: center; background: #0f1115; padding: 1rem;">
+              <a href="${proj.image}" target="_blank" title="Click to view full screen workflow diagram">
+                <img src="${proj.image}" alt="${proj.title} Workflow Diagram" style="width: 100%; max-height: 420px; object-fit: contain; display: block; margin: 0 auto;">
+              </a>
+              <div style="position: absolute; bottom: 1.5rem; right: 1.5rem; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; color: #fff; pointer-events: none; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 0.4rem;">
+                <span style="display: flex; align-items: center; gap: 0.35rem;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Click to expand
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upgraded KPI Metrics Banner -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 2rem 2.5rem 0; background: var(--bg);">
+          <div style="background: linear-gradient(135deg, rgba(34,197,94,0.06) 0%, rgba(19,22,29,0.7) 100%); border: 1px solid rgba(34,197,94,0.15); border-radius: 12px; padding: 1rem; text-align: center; box-shadow: inset 0 1px 1px rgba(255,255,255,0.02);">
+            <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Key Outcome</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: var(--green);">${proj.metric}</div>
+          </div>
+          <div style="background: linear-gradient(135deg, rgba(249,115,22,0.06) 0%, rgba(19,22,29,0.7) 100%); border: 1px solid rgba(249,115,22,0.15); border-radius: 12px; padding: 1rem; text-align: center; box-shadow: inset 0 1px 1px rgba(255,255,255,0.02);">
+            <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Stack Scope</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: var(--orange);">${proj.tools.length} Tools Connected</div>
+          </div>
+          <div style="background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(19,22,29,0.7) 100%); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Status</div>
+            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 0.4rem;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; box-shadow: 0 0 8px #22c55e; animation: pulse 1.5s infinite;"></span>
+              Active Production
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-body" style="padding-bottom: 0;">
+          <!-- Left Column -->
+          <div>
+            <div class="modal-section-title challenge-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              The Challenge
+            </div>
+            <p class="modal-section-desc">${proj.challenge}</p>
+            
+            <div class="comparison-box before">
+              <div class="comp-title before">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+                What was happening before
+              </div>
+              <ul class="comp-list before">
+                ${proj.before.map(li => `<li>${li}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Right Column -->
+          <div>
+            <div class="modal-section-title solution-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              The Solution & Results
+            </div>
+            <p class="modal-section-desc">${proj.solution}</p>
+            
+            <div class="comparison-box">
+              <div class="comp-title after">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                What happened after I stepped in
+              </div>
+              <ul class="comp-list after">
+                ${proj.after.map(li => `<li>${li}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-bottom-grid">
+          <div class="modal-quote" style="margin-bottom: 0;">
+            <div class="quote-text">"${proj.quote}"</div>
+            <div class="quote-author">— ${proj.author}</div>
+          </div>
+          
+          <div class="modal-results">
+            <div class="modal-results-title">Verified Result</div>
+            <div class="modal-results-metric">${proj.results.metric}</div>
+            <div class="modal-results-text">${proj.results.text}</div>
+          </div>
+        </div>
+      `;
+      
+      toggleModal(true);
+    }
+
+    function toggleModal(show) {
+      const modal = document.getElementById("case-study-modal");
+      modal.style.display = show ? "flex" : "none";
+      document.body.style.overflow = show ? "hidden" : "";
+    }
+
+    function closeModal(event) {
+      if (event.target.id === "case-study-modal") {
+        toggleModal(false);
+      }
+    }
+
+    // Initialize on load
+    document.addEventListener("DOMContentLoaded", () => {
+      renderGrid("all");
+    });
+  </script>
+
+</body>
+</html>

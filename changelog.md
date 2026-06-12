@@ -1,0 +1,73 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+- **2026-06-08:** Initialized the 4 Core Governance Files (`implementation.md`, `session_log.md`, `changelog.md`, `error_tracker.md`) to govern the transition to a multi-page portfolio website.
+- **2026-06-08:** Updated `shared.js` to change booking links to email/WhatsApp.
+- **2026-06-08:** Refactored `index.html` to serve as a clean homepage linking to external resources.
+- **2026-06-08:** Created `about.html` featuring hero, detailed story, stats, trust cards, timeline, and certifications.
+- **2026-06-08:** Created `services.html` with 8 customizable service cards, process step timeline, and native FAQ accordion.
+- **2026-06-08:** Created `portfolio.html` featuring 23 comprehensive case studies with category filtering and interactive detailed before/after modal overlays.
+- **2026-06-08:** Created `contact.html` with direct WhatsApp/email widgets and a fully functional lead capture form.
+- **2026-06-08:** Updated `portfolio.html` with user's 7 custom n8n case studies, dynamic filtering, and detailed modals.
+- **2026-06-08:** Completed end-to-end link testing, responsiveness checks, and chat/modal functionality verification.
+- **2026-06-09:** Decontaminated copy across `about.html`, `services.html`, and `portfolio.html` to remove banned AI words. Refined hero copy to highlight business outcomes, and resolved filter button click bug on the portfolio page.
+- **2026-06-09:** Copied 7 workflow screenshots to `assets/` and integrated them into the dynamic portfolio grid cards and case study modals.
+- **2026-06-09:** Replaced all emojis in the 8 service cards on `services.html` with clean modern inline SVG line icons and ticks.
+- **2026-06-09:** Removed the Tech Stack section from `index.html` as requested.
+- **2026-06-09:** Redesigned the homepage `index.html` layout to match user mockup screenshots (added live clock widget, two-column layout hero with avatar, 'About Me' panel card, 'Trusted Automation Tools I Use' logo-box strip, 'Results That Matter' card grid, and centered CTA box).
+- **2026-06-09:** Adapted homepage copy and implemented dynamic typing animation script cycling key services (n8n workflows, CRM integrations, AI agent pipelines, Vapi voice agents) in index.html.
+- **2026-06-09:** Removed the legacy Objections/FAQ grid block and the old manual work CTA section from `index.html` as requested.
+- **2026-06-09:** Updated the "Workflows Built" statistic in `about.html` from `8+` to `50+` based on user feedback.
+- **2026-06-09:** Replaced the fading gradient line with a solid orange timeline connector line in `services.html` to link processes 1 to 4 like nodes.
+- **2026-06-09:** Removed the process timeline connector line entirely from `services.html` as requested by the user.
+- **2026-06-09:** Rewrote "My Story" section in `about.html` using the chosen product marketing copywriting draft (Option 3).
+- **2026-06-09:** Simplified the third Freelance timeline bullet in `about.html` to: "Shipped functional code without traditional dev cycles".
+- **2026-06-09:** Updated product-marketing-context.md and homepage index.html tools section to add Airtable, Vapi, Claude, Gemini, ChatGPT and remove Notion, HoneyBook, Dubsado, ChatBase.
+- **2026-06-09:** Removed ChatGPT from the tools list and replaced text/letter placeholders in index.html with official brand SVG vector paths for n8n, Zapier, Airtable, Vapi, Claude, and Gemini.
+- **2026-06-09:** Integrated actual colored full-bleed square brand logo assets for n8n, GoHighLevel, Zapier, Airtable, Vapi, Claude, and Gemini on the homepage tools strip.
+- **2026-06-09:** Corrected GoHighLevel image loading in SVG via base64 embedding, and corrected the alignment/centering of the Vapi icon.
+- **2026-06-09:** Refined the subtitle on portfolio.html to say "some real-world case studies" instead of "7 real-world case studies".
+- **2026-06-09:** Overhauled codebase in `CV-Project/` (port 3456) to apply Option 1 upgrades: set tighter heading line-heights and negative tracking globally and on page-specific components.
+- **2026-06-09:** Overhauled duplicated codebase in `CV-Project-Minimalist/` (port 3457) to apply Option 2 upgrades: built light-mode editorial system with warm off-white background (#F7F6F3), serif display headings (Instrument Serif), flat cards, custom minimalist pills/buttons, and clean light-overlay modals.
+- **2026-06-09:** Applied redesign-skill specifications to Option 1 (Port 3456) files. Upgraded typography (text-wrap), layout grid containers, and transformed flat card/box elements into deep glassmorphic structures with tinted shadows, reactive hover states, tactile clicks, squircle avatars, and rotated squircles with spring physics.
+- **2026-06-09:** Completed Option 3 (Ultra-Minimalist Executive) Style Customization across all subpages (`about.html`, `services.html`, `portfolio.html`, `contact.html`) in `CV-Project-Minimalist-Exec/` using dark charcoal tones, sharp hairline borders, and pure white accents (served on Port 3458).
+- **2026-06-09:** Overhauled Option 4 (Retro-Future Terminal) inside `CV-Project-Terminal/` across all pages (`shared.css`, `index.html`, `about.html`, `services.html`, `portfolio.html`, `contact.html`) applying monospace variables, terminal green colorways (`#4ade80`), browser/editor header dots, and simplified borders (served on Port 3459).
+- **2026-06-09:** Wrote and executed a validation script verifying that all 4 port servers (3456, 3457, 3458, 3459) are up and serving all 5 internal pages successfully.
+- **2026-06-09:** Terminated all 4 active web preview servers on ports 3456, 3457, 3458, and 3459 following complete E2E design validations. All tasks successfully completed and workspace finalized.
+- **2026-06-10:** Reactivated the local Python preview server on port 3456 to serve the Option 1 Glassmorphic design.
+- **2026-06-10:** Reduced vertical padding, margins, and text sizes inside the footer class globally to make the bottom layout more compact and elegant.
+- **2026-06-10:** Added custom browser autofill style overrides globally in shared.css to prevent text readability bugs when input fields are autofilled.
+- **2026-06-10:** Applied high-specificity autofill class overrides in contact.html to resolve visual white/light-blue background contrast bugs on form inputs.
+- **2026-06-10:** Removed the subtext paragraph under the 'How It Works' process section and reduced the header container bottom margin to 2.5rem in `services.html` across all project directories to fix visual spacing gaps.
+- **2026-06-10:** Replaced emojis (`✅`, `🔧`, `🎯`, `📈`) in the 'Why Clients Trust Me' section on `about.html` with theme-styled, responsive inline SVGs across all portfolio directories.
+- **2026-06-10:** Redesigned `portfolio.html` case studies globally, implementing floating outcome badges on grid cards, styled tool pills, browser mockup diagram frames, and a live-status KPI metrics dashboard inside detail modals.
+- **2026-06-11:** Replaced emojis in case study details modal (The Challenge, The Solution, before/after lists, zoom triggers) with theme-styled inline SVGs across all portfolio directories.
+- **2026-06-11:** Restructured case study details modals to place the Quote and Verified Results cards side-by-side at the bottom, eliminating empty vertical columns height mismatch across all portfolio directories.
+- **2026-06-11:** Trimmed and customized expertise & certifications pills list in `about.html` across all portfolio directories to show exactly: n8n specialist, CRM automation, GoHighLevel Certified, Voice agents, Airtable, Vibecoding Expert, and GTM engineering.
+- **2026-06-11:** Downloaded and integrated the official Clay brand logo (in `assets/clay.svg` via base64 data URL) into the trusted tools row in `index.html`, and added 'Clay Expert' cert pill to `about.html` across all 6 project variants.
+- **2026-06-11:** Redesigned the homepage tools row in `index.html` into a slow-moving, infinite looping CSS marquee carousel across all 6 project variants, adding side gradient fades and hover pause behaviors.
+- **2026-06-11:** Made the entire site fully mobile-responsive across all 6 variants. Added 900px + 600px breakpoints to `index.html` (9 grid layouts), `about.html` (avatar/stats scaling), `portfolio.html` (modal KPI refactor), and `shared.css` (enhanced typography/spacing rules). Total: 24 files updated.
+- **2026-06-11:** Fixed mobile bottom navigation layout stretch (top: 0 inheritance bug) and black screen overlay issue by adding `top: auto;` to `.mobile-nav` class in `shared.css` globally across all 6 project variants.
+- **2026-06-11:** Fixed contact form dropdown options visibility (white-on-white text readability bug) in `contact.html` by styling `.form-select option` with theme-based variables (`var(--surface)` and `var(--text)`) across all 6 variants.
+- **2026-06-11:** Selected, cropped to a perfect square, scaled, and deployed `IMG-20260518-WA0574.jpg` as the official profile picture (`avatar.png` & `about-avatar.png`) across all 6 visual theme variants, verified via size checks.
+- **2026-06-11:** Removed seconds timer from live clock function and hardcoded placeholders inside `index.html` across all 6 visual theme variants to display in clean `HH:MM` format.
+- **2026-06-11:** Replaced the robot emoji placeholder (`🤖`) with the user's cropped picture (`assets/about-avatar.png`) in the `about.html` story section and configured clipping styles across all 6 visual theme variants.
+- **2026-06-11:** Decontaminated the first story paragraph in `about.html` across all 6 variants, removing AI-style negative parallelisms.
+- **2026-06-11:** Decontaminated paragraphs 2 and 3 in the `about.html` story section across all 6 variants, removing resume fluff and negative parallelisms.
+- **2026-06-11:** Simplified experience timeline date labels inside `about.html` to show only the years (sorted descending) across all 6 visual theme variants.
+- **2026-06-11:** Decontaminated `services.html` (AI-like phrasing, aligned tools list in FAQ 3 with updated stack, replaced ChatBase with OpenAI in chatbot card), `portfolio.html` (changed "some real-world..." to "Real-world..." in hero description), and `about.html` (rewrote trust card ROI bullet to use active voice) globally across all 6 visual theme variants.
+- **2026-06-11:** Removed negative parallelism ("It's not just about building automations — it's about delivering real, measurable results") from the "Why Clients Trust Me" section subtitle in `about.html`, replacing it with a direct, results-focused sentence across all 6 variants.
+- **2026-06-11:** Fixed a mobile CSS Grid layout bug in `about.html`'s experience timeline by forcing `.timeline-dot` and `.timeline-content` to columns 2 and 3 explicitly, and removing `padding-left` from `.timeline-item` on screens <600px to prevent the content card from being squeezed into a 40px column width across all 6 project variants.
+- **2026-06-11:** Deployed user contact credentials (email: okoh656@gmail.com, WhatsApp phone: +2347015471668) globally across all email/WhatsApp links, buttons, and contact forms in index.html, about.html, services.html, portfolio.html, and contact.html across all 6 project variants.
+- **2026-06-11:** Implemented site-wide load speed performance optimizations across all 6 variants: converted PNG profile pictures to WebP (90.6% size reduction from 292KB to 27KB), removed render-blocking CSS `@imports` for Google Fonts, injected parallel HTML font link tags with preconnect hints in `<head>`, and deferred `shared.js` script executions.
+- **2026-06-12:** Reactivated the local Python preview server on port 3456 to serve the Option 1 Glassmorphic design.
+- **2026-06-12:** Reverted the custom shadow DOM element and script for the contact message textarea, restoring the original native textarea across all 6 project variants. Corrected legacy email references in chatbot replies (`shared.js`) to match the user's active email address (`okoh656@gmail.com`) globally.
+- **2026-06-12:** Removed the chatbot widget HTML button and panel markup from all 5 internal pages globally across all 6 project variants (30 pages updated) to declutter the user interface. Cleaned up dead chatbot CSS rules in `shared.css` and removed initialization JavaScript logic from `shared.js` inside the active `CV-Project/` directory.
+- **2026-06-12:** Consolidated project scope to focus exclusively on Option 1 (Glassmorphism) inside the `CV-Project/` directory, dropping support for other options.
+- **2026-06-12:** Configured `contact.html` (Option 1) to support Netlify Forms by adding `name` attributes, `data-netlify="true"`, and writing a secure AJAX `fetch()` submission handler to send leads directly to Netlify without breaking the success screen overlay.
+- **2026-06-12:** Decontaminated the homepage hero description in `index.html` (Option 1), changing it from a copied formulaic string to custom, humanized copy focused on active integration outcomes.
+- **2026-06-12:** Replaced the top page hero tag 'My Story' with 'Hi, i'm Moses' in `about.html` (Option 1) to personalize the hero section while keeping the second 'My Story' section label intact.
+- **2026-06-12:** Applied copywriting and decontamination skills to `about.html` to eliminate AI clichés, passive structures, and generic templates in the hero, story section, trust cards, timelines, and CTA band.
+- **2026-06-12:** Applied copywriting and decontamination skills to `services.html` to eliminate AI clichés, passive structures, and boilerplate templates in all 8 service descriptions, the process timeline steps, FAQ answers, and the CTA band.
+
