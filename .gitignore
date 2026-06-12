@@ -1,8 +1,17 @@
-# Python
+# Python files and caches
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.py
+
+# Lead data and databases
+*.csv
+*.json
+outreach_drafts/
+
+# Markdown/Documentation (non-website assets)
+*.md
 
 # Log files
 *.log
