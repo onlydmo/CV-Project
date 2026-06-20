@@ -666,6 +666,57 @@
         quote: "I type a question into Telegram and the agent tells me who's available, creates the booking, and sends the caretaker their checklist. What used to take 20 minutes now takes 30 seconds.",
         author: "Amelia Osei-Bonsu, Operations Director",
         tools: ["n8n", "LangChain Agent", "OpenAI GPT-4o-mini", "Telegram Bot", "Airtable", "Fallback LLM"]
+      },
+      {
+        title: "AI-Powered Inbox Triage & Task Orchestrator",
+        client: "VentureLaunch Studio",
+        category: "workflows",
+        categoryLabel: "n8n & Workflows",
+        image: "assets/inbox-assistant.png",
+        desc: "Deployed AI email triaging system classifying incoming messages, auto-booking meetings, and syncing tasks directly to Airtable.",
+        metric: "15+ hrs/mo saved",
+        challenge: "VentureLaunch Studio was overwhelmed with email queries from startups, partners, and media. The general inbox received 200+ messages daily. Staff spent 2-3 hours per day manually reading, routing, scheduling meetings, and logging follow-ups into Airtable. Important partnership requests were frequently buried, and meeting coordination took multiple back-and-forth emails.",
+        solution: "Built an automated email routing workflow that watches the inbox, uses OpenAI GPT-4o to parse email intent and prioritize messages. For meeting requests, the system queries Google Calendar and sends a calendar invite with a confirmation email. For action items, it creates task entries in Airtable and notifies the team via Slack.",
+        before: ["2-3 hours/day spent on manual email triage", "Partnership and investment emails delayed by 48+ hours", "Dozens of back-and-forth emails to schedule a single call", "No central system tracking email action items", "Important investor follow-ups frequently missed"],
+        after: ["Email sorting and scheduling fully automated", "Priority emails flagged and replied to within 5 minutes", "One-click auto-bookings with zero manual coordination", "Airtable tasks auto-populated with context and deadlines", "Team productivity increased with central Slack updates"],
+        results: { metric: "15 hrs/mo", text: "Admin Overhead Saved" },
+        quote: "Our inbox was a black hole. This system has given our team hours back every single week, and we've stopped missing key partnership requests.",
+        author: "Elisa Vance, Managing Partner",
+        tools: ["Make.com", "OpenAI API", "Gmail", "Google Calendar", "Airtable", "Slack", "JavaScript"]
+      },
+      {
+        title: "Shopify Order Parser & Automated Operations Sheet",
+        client: "HydroPulse Activewear",
+        category: "workflows",
+        categoryLabel: "n8n & Workflows",
+        image: "assets/shopify-tracker.png",
+        desc: "Automated Shopify order processing, extracting variants and custom properties to build a color-coded Google Sheets operations dashboard.",
+        metric: "99.8% order accuracy",
+        challenge: "HydroPulse Activewear was manually copying Shopify order data (including custom printing details and product variants) into Google Sheets to manage production. During sales peaks, order volumes surged to 300+ daily, leading to typing errors, wrong variant fulfillments, and delayed updates to shipping teams, causing customer complaints.",
+        solution: "Created an automated tracker that captures Shopify new order webhooks, extracts product variant titles and line item properties, evaluates custom specifications, logs them as clean rows in Google Sheets, and applies custom color-coding rules based on order priority and shipping method.",
+        before: ["Manual data entry for 200+ daily custom orders", "Fulfillment errors due to typos in product variants", "Production and shipping sheets unsynced, causing delays", "No color-coding to quickly highlight express orders", "High customer return rates from wrong item dispatches"],
+        after: ["100% automated Shopify-to-Sheets synchronization", "Zero human typing errors in order details", "Real-time updates keep production and shipping in perfect sync", "Express orders auto-highlighted in red for instant picking", "Return rates dropped by 85% in the first month"],
+        results: { metric: "85%", text: "Return Rate Reduction" },
+        quote: "Peak shopping season used to be a nightmare of spreadsheets and customer returns. Now, our order tracker keeps the warehouse perfectly in sync.",
+        author: "Lukas Novak, Logistics Director",
+        tools: ["Make.com", "Shopify API", "Google Sheets", "Gmail"]
+      },
+      {
+        title: "Instant AI Lead Scoring & Hot-Lead Dispatch",
+        client: "Apex Legal Group",
+        category: "crm",
+        categoryLabel: "CRM & Lead Ops",
+        image: "assets/hot-lead-alert.png",
+        desc: "Built AI lead scoring workflow mapping inbound legal forms, rating buyer intent, and triggering instant rich HTML email alerts to attorneys.",
+        metric: "4× faster close rate",
+        challenge: "Apex Legal Group's attorneys were slow to follow up on high-value corporate leads because they were mixed in with spam and small individual inquiries. Their average response time was 12-24 hours, and competitors were winning deals by responding faster. They needed a way to instantly identify and route VIP corporate inquiries.",
+        solution: "Implemented an n8n workflow that catches intake form submissions, parses messages via OpenAI to score lead value from 1 to 10 based on firmographics and case description, logs data to Google Sheets, and if the score is 8 or higher, sends a high-priority 'HOT LEAD ALERT!' HTML email containing all case details and a quick dial link.",
+        before: ["Lead response times averaging 12-24 hours", "Attorneys wasting hours qualifying leads manually", "High-value corporate clients lost to faster competitors", "Spam and low-value inquiries clogging inboxes", "No analytics on incoming lead quality"],
+        after: ["Leads scored and routed in under 2 seconds", "Attorneys receive immediate alerts for hot leads only", "Response time for VIP leads reduced to under 5 minutes", "Spam filtered out and low-value leads auto-replied", "Full lead metrics dashboard tracked in Google Sheets"],
+        results: { metric: "< 5 mins", text: "VIP Response Time" },
+        quote: "We've signed three major corporate clients this month simply because we called them within 5 minutes of their submission while they were still on our site.",
+        author: "Diana Vance, Senior Partner",
+        tools: ["n8n", "OpenAI GPT-4o", "Google Sheets", "Gmail API", "HTML/CSS"]
       }
     ];
 
